@@ -44,7 +44,7 @@ title('Sharpened image through fspecial kernel log')
 
 subplot(1,3,3)
 imshow(im_blur7)
-title('Blurred image throughfspecial kernel gaussian ')
+title('Blurred image through fspecial kernel gaussian')
 
 
 % %show images
@@ -63,8 +63,7 @@ title('Blurred image throughfspecial kernel gaussian ')
 % figure;
 % imshow(im_blur31);
 
-% 2
-
+% 2 - see overleaf
 % 3
 
 
