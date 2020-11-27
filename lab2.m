@@ -69,13 +69,26 @@ title('Blurred image through fspecial kernel gaussian')
 
 
 %%%%%%%%%%%%%%%%%%
-% 2 SOBEL FILTER %
+% 2 SOBEL FILTER % AlEX HAR BÖRJAT 
 %%%%%%%%%%%%%%%%%%
-% 4
+H = fspecial('sobel'); imsobel=imfilter(im,H); 
+subplot(2,2,1)
+imshow(imsobel);H = fspecial('sobel'); imsobel=imfilter(im,H'); 
+subplot(2,2,2)
+imshow(imsobel);
 
+
+im2=imread('wagon.png');
+H = fspecial('sobel'); imsobel2=imfilter(im2,H); 
+subplot(2,2,3)
+imshow(imsobel2);
+im2=imread('wagon.png');
+H = fspecial('sobel'); imsobel2=imfilter(im2,H'); 
+subplot(2,2,4)
+imshow(imsobel2);
 
 %%%%%%%%%%%%%%%%%%%
-% 3 MEDIAN FILTER %
+% 3 MEDIAN FILTER % 
 %%%%%%%%%%%%%%%%%%%
 % 5
 % 6

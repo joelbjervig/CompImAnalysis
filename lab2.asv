@@ -5,7 +5,7 @@ close all;
 % 1 CONCOLUTION %
 %%%%%%%%%%%%%%%%%
 % 1
-%read image
+%read  image
 im = imread('cameraman.png');
 
 %create kernels
@@ -40,11 +40,11 @@ title('Original image')
 
 subplot(1,3,2)
 imshow(im_sharp7)
-title('Sharpened image through fspecial kernel 'log'')
+title('Sharpened image through fspecial kernel log')
 
 subplot(1,3,3)
 imshow(im_blur7)
-title('Blurred image throughfspecial kernel gaussian ')
+title('Blurred image through fspecial kernel gaussian')
 
 
 % %show images
@@ -63,19 +63,23 @@ title('Blurred image throughfspecial kernel gaussian ')
 % figure;
 % imshow(im_blur31);
 
-% 2
+% 2 - see overleaf
 % 3
 
 
 
 %%%%%%%%%%%%%%%%%%
-% 2 SOBEL FILTER %
+% 2 SOBEL FILTER % AlEX HAR BÖRJAT 
 %%%%%%%%%%%%%%%%%%
-% 4
-
+H = fspecial('sobel'); imsobel=imfilter(im,H); 
+subplot(2,1,1)
+imshow(imsobel);
+H = fspecial('sobel'); imsobel=imfilter(im,H); 
+subplot(2,1,1)
+imshow(imsobel);
 
 %%%%%%%%%%%%%%%%%%%
-% 3 MEDIAN FILTER %
+% 3 MEDIAN FILTER % 
 %%%%%%%%%%%%%%%%%%%
 % 5
 % 6
