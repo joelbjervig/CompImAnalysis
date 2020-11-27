@@ -33,8 +33,6 @@ im_blur3 = imfilter(im,B3);
 im_blur7 = imfilter(im,B7);
 im_blur31 = imfilter(im,B31);
 
-%show images
-% sharp
 figure;
 imshow(im_sharp3);
 figure;
