@@ -64,6 +64,7 @@ title('Blurred image throughfspecial kernel gaussian ')
 % imshow(im_blur31);
 
 % 2
+
 % 3
 
 
