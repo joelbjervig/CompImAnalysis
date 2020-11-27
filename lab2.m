@@ -5,7 +5,7 @@ close all;
 % 1 CONCOLUTION %
 %%%%%%%%%%%%%%%%%
 % 1
-%read image
+%read  image
 im = imread('cameraman.png');
 
 %create kernels
