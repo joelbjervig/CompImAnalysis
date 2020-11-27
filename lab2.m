@@ -34,18 +34,34 @@ im_blur7 = imfilter(im,B7);
 im_blur31 = imfilter(im,B31);
 
 figure;
-imshow(im_sharp3);
-figure;
-imshow(im_sharp7);
-figure;
-imshow(im_sharp31);
-% blur
-figure;
-imshow(im_blur3);
-figure;
-imshow(im_blur7);
-figure;
-imshow(im_blur31);
+subplot(1,3,1)
+imshow(im)
+title('Original image')
+
+subplot(1,3,2)
+imshow(im_sharp7)
+title('Sharpened image through fspecial kernel log')
+
+subplot(1,3,3)
+imshow(im_blur7)
+title('Blurred image throughfspecial kernel gaussian ')
+
+
+% %show images
+% % sharp
+% figure;
+% imshow(im_sharp3);
+% figure;
+% imshow(im_sharp7);
+% figure;
+% imshow(im_sharp31);
+% % blur
+% figure;
+% imshow(im_blur3);
+% figure;
+% imshow(im_blur7);
+% figure;
+% imshow(im_blur31);
 
 % 2
 % 3
