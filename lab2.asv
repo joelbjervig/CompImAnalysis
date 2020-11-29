@@ -125,7 +125,6 @@ imagesc(im8)
 % 4 FAST FOURIER TRANSFORM %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 10
-figure
 I2 = (imread('lines.png'));
 IFFT=abs(log(fftshift(fft2(double(I2)))));
 subplot(2,2,2)
@@ -141,17 +140,8 @@ imshow(I3);
 
 
 % 11
-figure
 I4=abs(log(fftshift(fft2(rand(1,5)))))
 I5=abs(log(fftshift(fft2(rand(1,6)))))
-subplot(2,2,1)
-imagesc(I4)
-subplot(2,2,2)
-imagesc(I5)
-subplot(2,2,3)
-text(-0.0,1.0,num2str(I4),'FontSize',6); axis off
-subplot(2,2,4)
-text(-0.0,1.0,num2str(I5),'FontSize',6); axis off
 
 
 % 12
