@@ -99,7 +99,7 @@ frequencyImage(brightSpikes) = 0;
 amplitudeImage2 = log(abs(frequencyImage));
 minValue = min(min(amplitudeImage2))
 maxValue = max(max(amplitudeImage2))
-subplot(2, 3, 5);
+% subplot(2, 3, 5);
 imshow(amplitudeImage2, [minValue maxValue]);
 axis on;
 title('Spikes zeroed out', 'FontSize', fontSize);
