@@ -191,7 +191,22 @@ close all;
 % title('I5 filtered');
 % 
 % % 12
-% 
+im12 = double(im);
+size = length(im12); %length of image of cameraman
+imFreq=fftshift(fft2(im12));% frequency amplitude of image
+
+filter = zeros(size,size);
+% include only the central DC, from row 115 to 143.
+center_ind = (length(filter)+2)/2;
+%filter rectangle width
+width = 20;
+boundl = center_ind-width;
+boundh = center_ind+width;
+filter(boundl:boundh, boundl:boundh) = 1;
+% LP = low pass, FS = frequency spectrum
+im12LPFS = filter.*imFreq;
+im12LP = ifft2(im12LPFS);
+imshow(uint8(im12LP))
 % % 13
 
 I7=imread('freqdist.png');
