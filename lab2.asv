@@ -125,10 +125,25 @@ imagesc(im8)
 % 4 FAST FOURIER TRANSFORM %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 10
-Ilines = double(imread('lines.png'));
-IFFT=abs(log(fftshift(fft2(I))));
+I2 = (imread('lines.png'));
+IFFT=abs(log(fftshift(fft2(double(I2)))));
+subplot(2,2,2)
 imagesc(IFFT);
+subplot(2,2,1);
+imshow(I2);
+I3 = (imread('cameraman.png'));
+IFFT=abs(log(fftshift(fft2(double(I3)))));
+subplot(2,2,4)
+imagesc(IFFT);
+subplot(2,2,3);
+imshow(I3);
+
+
 % 11
+I4=abs(log(fftshift(fft2(rand(1,5)))))
+I5=abs(log(fftshift(fft2(rand(1,6)))))
+
+
 % 12
 % 13
 
