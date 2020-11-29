@@ -191,26 +191,28 @@ close all;
 % title('I5 filtered');
 % 
 % % 12
-im12 = double(im);
-size = length(im12); %length of image of cameraman
-imFreq=fftshift(fft2(im12));% frequency amplitude of image
+% im12 = double(im);
+% size = length(im12); %length of image of cameraman
+% imFreq=fftshift(fft2(im12));% frequency amplitude of image
+% 
+% filter = zeros(size,size);
+% % include only the central DC, from row 115 to 143.
 
-filter = zeros(size,size);
-% include only the central DC, from row 115 to 143.
-center_ind = (length(filter)+2)/2;
-%filter rectangle width
-width = 20;
-boundl = center_ind-width;
-boundh = center_ind+width;
-filter(boundl:boundh, boundl:boundh) = 1;
-% LP = low pass, FS = frequency spectrum
-im12LPFS = filter.*imFreq;
-im12LP = ifft2(im12LPFS);
-imshow(uint8(im12LP))
+% %filter rectangle width
+% center_ind = (length(filter)+2)/2;
+% width = 20;
+% boundl = center_ind-width;
+% boundh = center_ind+width;
+% filter(boundl:boundh, boundl:boundh) = 1;
+% % LP = low pass, FS = frequency spectrum
+% im12LPFS = filter.*imFreq;
+% im12LP = ifft2(im12LPFS);
+% imshow(uint8(im12LP))
 % % 13
 
 I7=imread('freqdist.png');
 subplot(2,3,1)
+imshow(I7);
 I7FFT=fftshift(fft2(I7));
 I7FFTamplitude=abs(log(I7FFT));
 subplot(2,3,2)
@@ -220,7 +222,12 @@ threshold=10.9;
 
 spikes = I7FFTamplitude > threshold; % Binary image.
 
-spikes(115:142,:) = 0;
+%filter rectangle width
+center_ind = (length(spikes)+2)/2;
+width = 20;
+boundl = center_ind-width;
+boundh = center_ind+width;
+spikes(boundl:boundh,boundl:boundh) = 0;
 subplot(2, 3, 3);
 imshow(spikes);
 
@@ -228,7 +235,7 @@ I7FFT(spikes)=0;
 I77=ifft2(I7FFT);
 I77amplitude=abs(log(ifft2(I7FFT)));
 subplot(2,3,4)
-imshow(I77)
+imagesc(I77)
 subplot(2,3,5)
 imagesc(I77amplitude);
 subplot(2,3,6)
