@@ -158,8 +158,37 @@ text(-0.0,1.0,num2str(I5),'FontSize',6); axis off
 % filter out certain freq by setting some elements in I4 and I5 to zero
 % take into account the "characteristics" of the two vectors i.e. the
 % symmetric behaviour of fft2
+I4_filtered = I4;
+I5_filtered = I5;
+I4_filtered(1)=0;
+I5_filtered(1)=0;
+figure;
+subplot(2,2,1)
+plot(I4)
+title('I4');
+subplot(2,2,2)
+plot(I5)
+title('I5');
+subplot(2,2,3)
+plot(I4_filtered)
+title('I4 filtered');
+subplot(2,2,4)
+plot(I5_filtered)
+title('I5 filtered');
 
-
+figure;
+subplot(2,2,1)
+plot(ifft2(I4))
+title('I4');
+subplot(2,2,2)
+plot(ifft2(I5))
+title('I5');
+subplot(2,2,3)
+plot(ifft2(I4_filtered))
+title('I4 filtered');
+subplot(2,2,4)
+plot(ifft2(I5_filtered))
+title('I5 filtered');
 % 12
 % 13
 
