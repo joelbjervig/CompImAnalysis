@@ -141,9 +141,11 @@ imshow(I3);
 
 
 % 11
+A = rand(1,5);
+B = rand(1,6);
 figure
-I4=abs(log(fftshift(fft2(rand(1,5)))))
-I5=abs(log(fftshift(fft2(rand(1,6)))))
+I4=abs(log(fftshift(fft2(A))));
+I5=abs(log(fftshift(fft2(B))));
 subplot(2,2,1)
 imagesc(I4)
 subplot(2,2,2)
@@ -152,6 +154,10 @@ subplot(2,2,3)
 text(-0.0,1.0,num2str(I4),'FontSize',6); axis off
 subplot(2,2,4)
 text(-0.0,1.0,num2str(I5),'FontSize',6); axis off
+
+% filter out certain freq by setting some elements in I4 and I5 to zero
+% take into account the "characteristics" of the two vectors i.e. the
+% symmetric behaviour of fft2
 
 
 % 12
