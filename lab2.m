@@ -90,16 +90,53 @@ imshow(imsobel2);
 %%%%%%%%%%%%%%%%%%%
 % 3 MEDIAN FILTER % 
 %%%%%%%%%%%%%%%%%%%
-% 5
-% 6
-% 7
-% 8
-% 9
+% 8 - custom implementation of median
+im8 = double(imread('wagon.png'));
+
+% image resolution
+size = size(im8);
+rowSize = size(1);
+colSize = size(2);
+
+% kernelsize
+M = 3;
+N = 3;
+output = double(zeros(rowSize,colSize));
+for f = 1:rowSize-(M-1)
+    for g = 1:colSize-(N-1)
+        median = 0; % initialize median variable as zero
+        for i = 0:M-1
+            for j = 0:N-1        
+                if(median<im8(f+i,g+j))
+                        median = im8(f+i,g+j);
+                end
+            end
+        end
+        output(f+i,g+j) = median;
+    end
+    
+end
+subplot(1,2,1)
+imagesc(output)
+subplot(1,2,2)
+imagesc(im8)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 4 FAST FOURIER TRANSFORM %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 10
+I2 = (imread('lines.png'));
+IFFT=abs(log(fftshift(fft2(double(I2)))));
+subplot(2,2,2)
+imagesc(IFFT);
+subplot(2,2,1);
+imshow(I2);
+I3 = (imread('cameraman.png'));
+IFFT=abs(log(fftshift(fft2(double(I3)))));
+subplot(2,2,4)
+imagesc(IFFT);
+subplot(2,2,3);
+imshow(I3);
 % 11
 % 12
 % 13
