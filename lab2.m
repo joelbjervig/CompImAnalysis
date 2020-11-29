@@ -191,4 +191,6 @@ plot(ifft2(I5_filtered))
 title('I5 filtered');
 % 12
 % 13
-
+I5=imread('freqdist.png');
+imshow(I5);
+histogram(I5);
