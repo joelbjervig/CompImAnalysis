@@ -211,11 +211,11 @@ close all;
 % % 13
 
 I7=imread('freqdist.png');
-subplot(2,3,1)
+subplot(2,2,1)
 imshow(I7);
 I7FFT=fftshift(fft2(I7));
 I7FFTamplitude=abs(log(I7FFT));
-subplot(2,3,2)
+subplot(2,2,2)
 imagesc(I7FFTamplitude);
 
 threshold=10.9;
@@ -228,15 +228,11 @@ width = 20;
 boundl = center_ind-width;
 boundh = center_ind+width;
 spikes(boundl:boundh,boundl:boundh) = 0;
-subplot(2, 3, 3);
+subplot(2, 2, 3);
 imshow(spikes);
 
 I7FFT(spikes)=0;
-I77=ifft2(I7FFT);
+I77=uint8(ifft2(I7FFT));
 I77amplitude=abs(log(ifft2(I7FFT)));
-subplot(2,3,4)
-imagesc(I77)
-subplot(2,3,5)
-imagesc(I77amplitude);
-subplot(2,3,6)
-histogram(I77amplitude);
+subplot(2,2,4)
+imshow(I77)
