@@ -190,49 +190,59 @@ close all;
 % plot(ifft2(I5_filtered))
 % title('I5 filtered');
 % 
-% % 12
-% im12 = double(im);
-% size = length(im12); %length of image of cameraman
-% imFreq=fftshift(fft2(im12));% frequency amplitude of image
-% 
-% filter = zeros(size,size);
-% % include only the central DC, from row 115 to 143.
+% 12
+im12 = double(imread('cameraman.png')); % read image
+size = length(im12);        % length of image of cameraman
+imFreq=fftshift(fft2(im12));% frequency amplitude of image
 
+filter = zeros(size,size);  %create filter
+
+% include only the central DC of size 2*width X 2*width
+% define rectangle
+center_ind = (length(filter)+2)/2; % find center index of filter
+width = 20;                        % set a width for rectangle
+boundl = center_ind-width;  % lower bound of rectangle
+boundh = center_ind+width;  % upper bound of rectanlge
+filter(boundl:boundh, boundl:boundh) = 1;   % synthezise rectangle
+% LP = low pass, FS = frequency domain
+im12LPFD = filter.*imFreq;  % multiply in frequency domain is convolution in spacial domain
+im12LP = ifft2(im12LPFD);   % inverse transform of symmetric image gives no imaginary elements
+
+figure
+subplot(1,3,1)
+imshow(uint8(im12))
+title('original image')
+subplot(1,3,2)
+imagesc(abs(log(im12LPFD)));
+title('frequency domain filtered by rectangle')
+subplot(1,3,3)
+imshow(uint8(im12LP))       % change to unsigned int 8 bit and show
+title('filtered image')
+% % 13
+% 
+% I7=imread('freqdist.png');
+% subplot(2,2,1)
+% imshow(I7);
+% I7FFT=fftshift(fft2(I7));
+% I7FFTamplitude=abs(log(I7FFT));
+% subplot(2,2,2)
+% imagesc(I7FFTamplitude);
+% 
+% threshold=10.9;
+% 
+% spikes = I7FFTamplitude > threshold; % Binary image.
+% 
 % %filter rectangle width
-% center_ind = (length(filter)+2)/2;
+% center_ind = (length(spikes)+2)/2;
 % width = 20;
 % boundl = center_ind-width;
 % boundh = center_ind+width;
-% filter(boundl:boundh, boundl:boundh) = 1;
-% % LP = low pass, FS = frequency spectrum
-% im12LPFS = filter.*imFreq;
-% im12LP = ifft2(im12LPFS);
-% imshow(uint8(im12LP))
-% % 13
-
-I7=imread('freqdist.png');
-subplot(2,2,1)
-imshow(I7);
-I7FFT=fftshift(fft2(I7));
-I7FFTamplitude=abs(log(I7FFT));
-subplot(2,2,2)
-imagesc(I7FFTamplitude);
-
-threshold=10.9;
-
-spikes = I7FFTamplitude > threshold; % Binary image.
-
-%filter rectangle width
-center_ind = (length(spikes)+2)/2;
-width = 20;
-boundl = center_ind-width;
-boundh = center_ind+width;
-spikes(boundl:boundh,boundl:boundh) = 0;
-subplot(2, 2, 3);
-imshow(spikes);
-
-I7FFT(spikes)=0;
-I77=uint8(ifft2(I7FFT));
-I77amplitude=abs(log(ifft2(I7FFT)));
-subplot(2,2,4)
-imshow(I77)
+% spikes(boundl:boundh,boundl:boundh) = 0;
+% subplot(2, 2, 3);
+% imshow(spikes);
+% 
+% I7FFT(spikes)=0;
+% I77=uint8(ifft2(I7FFT));
+% I77amplitude=abs(log(ifft2(I7FFT)));
+% subplot(2,2,4)
+% imshow(I77)
