@@ -1,0 +1,15 @@
+1 - '..and explain the effect of the different filter sizes'
+
+4 - The idea of the task was to combine the x and y directions
+
+5 - Where are the images?
+
+7 - i.e. sorting
+
+8 - Can you demonstrate that it works with wagon with noise? It does not look like a median filter, you need to compute median somewhere
+
+10 - Check if you remove the second vertical line in lines image, whether you get a more defined horisontal line and why
+
+11 - You did not answer how it relates to the case when we want to delete a frequency
+
+12 - Again, it is linked to Q.11. The resulted image should not contain artefacts. The idea to leave only frequencies close to the central is correct.

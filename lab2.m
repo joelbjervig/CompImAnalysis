@@ -91,36 +91,33 @@ close all;
 % % 3 MEDIAN FILTER % 
 % %%%%%%%%%%%%%%%%%%%
 % % 8 - custom implementation of median
-% im8 = double(imread('wagon.png'));
-% 
-% % image resolution
-% size = size(im8);
-% rowSize = size(1);
-% colSize = size(2);
-% 
-% % kernelsize
-% M = 3;
-% N = 3;
-% output = double(zeros(rowSize,colSize));
-% for f = 1:rowSize-(M-1)
-%     for g = 1:colSize-(N-1)
-%         median = 0; % initialize median variable as zero
-%         for i = 0:M-1
-%             for j = 0:N-1        
-%                 if(median<im8(f+i,g+j))
-%                         median = im8(f+i,g+j);
-%                 end
-%             end
-%         end
-%         output(f+i,g+j) = median;
-%     end
-%     
-% end
-% subplot(1,2,1)
-% imagesc(output)
-% subplot(1,2,2)
-% imagesc(im8)
-% 
+im8 = double(imread('wagon_shot_noise.png'));
+
+% image resolution
+size = size(im8);
+rowSize = size(1);
+colSize = size(2);
+
+% kernelsize
+M = 3;
+N = 3;
+median = 0:
+output = double(zeros(rowSize,colSize));
+for f = 1:rowSize-(M-1)
+    for g = 1:colSize-(N-1)
+        for i = 0:M-1
+            for j = 0:N-1        
+                output(f+i,g+j) = median(im8());
+            end
+        end
+    end
+    
+end
+subplot(1,2,1)
+imagesc(output)
+subplot(1,2,2)
+imagesc(im8)
+
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % % 4 FAST FOURIER TRANSFORM %
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -191,33 +188,33 @@ close all;
 % title('I5 filtered');
 % 
 % 12
-im12 = double(imread('cameraman.png')); % read image
-size = length(im12);        % length of image of cameraman
-imFreq=fftshift(fft2(im12));% frequency amplitude of image
-
-filter = zeros(size,size);  %create filter
-
-% include only the central DC of size 2*width X 2*width
-% define rectangle
-center_ind = (length(filter)+2)/2; % find center index of filter
-width = 20;                        % set a width for rectangle
-boundl = center_ind-width;  % lower bound of rectangle
-boundh = center_ind+width;  % upper bound of rectanlge
-filter(boundl:boundh, boundl:boundh) = 1;   % synthezise rectangle
-% LP = low pass, FS = frequency domain
-im12LPFD = filter.*imFreq;  % multiply in frequency domain is convolution in spacial domain
-im12LP = ifft2(im12LPFD);   % inverse transform of symmetric image gives no imaginary elements
-
-figure
-subplot(1,3,1)
-imshow(uint8(im12))
-title('original image')
-subplot(1,3,2)
-imagesc(abs(log(im12LPFD)));
-title('frequency domain filtered by rectangle')
-subplot(1,3,3)
-imshow(uint8(im12LP))       % change to unsigned int 8 bit and show
-title('filtered image')
+% im12 = double(imread('cameraman.png')); % read image
+% size = length(im12);        % length of image of cameraman
+% imFreq=fftshift(fft2(im12));% frequency amplitude of image
+% 
+% filter = zeros(size,size);  %create filter
+% 
+% % include only the central DC of size 2*width X 2*width
+% % define rectangle
+% center_ind = (length(filter)+2)/2; % find center index of filter
+% width = 20;                        % set a width for rectangle
+% boundl = center_ind-width;  % lower bound of rectangle
+% boundh = center_ind+width;  % upper bound of rectanlge
+% filter(boundl:boundh, boundl:boundh) = 1;   % synthezise rectangle
+% % LP = low pass, FS = frequency domain
+% im12LPFD = filter.*imFreq;  % multiply in frequency domain is convolution in spacial domain
+% im12LP = ifft2(im12LPFD);   % inverse transform of symmetric image gives no imaginary elements
+% 
+% figure
+% subplot(1,3,1)
+% imshow(uint8(im12))
+% title('original image')
+% subplot(1,3,2)
+% imagesc(abs(log(im12LPFD)));
+% title('frequency domain filtered by rectangle')
+% subplot(1,3,3)
+% imshow(uint8(im12LP))       % change to unsigned int 8 bit and show
+% title('filtered image')
 % % 13
 % 
 % I7=imread('freqdist.png');
