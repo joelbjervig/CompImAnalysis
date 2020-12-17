@@ -10,9 +10,9 @@ im = imread('cameraman.png');
 % 
 % %create kernels
 % %sharp
-S3 = fspecial('log',3,0.5);
-S7 = fspecial('log',7,0.5);
-S31 = fspecial('log',31,0.5);
+% S3 = fspecial('log',3,0.5);
+% S7 = fspecial('log',7,0.5);
+% S31 = fspecial('log',31,0.5);
 
 % figure;
 % mesh(S31);
@@ -26,23 +26,33 @@ S31 = fspecial('log',31,0.5);
 % 
 % % convolve image with kernels
 % % sharpen
-im_sharp3 = imfilter(im,S3);
-im_sharp7 = imfilter(im,S7);
-im_sharp31 = imfilter(im,S31);
-
-figure
-subplot(1,3,1)
-imshow(im_sharp3)
-subplot(1,3,2)
-imshow(im_sharp7)
-subplot(1,3,3)
-imshow(im_sharp31)
+% im_sharp3 = imfilter(im,S3);
+% im_sharp7 = imfilter(im,S7);
+% im_sharp31 = imfilter(im,S31);
+% 
+% figure
+% subplot(1,3,1)
+% imshow(im_sharp3)
+% subplot(1,3,2)
+% imshow(im_sharp7)
+% subplot(1,3,3)
+% imshow(im_sharp31)
 
 % % blur
 % im_blur3 = imfilter(im,B3);
 % im_blur7 = imfilter(im,B7);
 % im_blur31 = imfilter(im,B31);
 % 
+% 
+% figure
+% subplot(1,3,1)
+% imshow(im_blur3)
+% subplot(1,3,2)
+% imshow(im_blur7)
+% subplot(1,3,3)
+% imshow(im_blur31)
+
+
 % figure;
 % subplot(1,3,1)
 % imshow(im)
@@ -101,32 +111,37 @@ imshow(im_sharp31)
 % % 3 MEDIAN FILTER % 
 % %%%%%%%%%%%%%%%%%%%
 % % 8 - custom implementation of median
-% im8 = double(imread('wagon_shot_noise.png'));
+im8 = double(imread('wagon_shot_noise.png'));
 % 
 % % image resolution
-% size = size(im8);
-% rowSize = size(1);
-% colSize = size(2);
-% 
-% % kernelsize
-% M = 3;
-% N = 3;
-% median = 0:
-% output = double(zeros(rowSize,colSize));
-% for f = 1:rowSize-(M-1)
-%     for g = 1:colSize-(N-1)
-%         for i = 0:M-1
-%             for j = 0:N-1        
-%                 output(f+i,g+j) = median(im8());
-%             end
-%         end
-%     end
-%     
-% end
-% subplot(1,2,1)
-% imagesc(output)
-% subplot(1,2,2)
-% imagesc(im8)
+size = size(im8);
+rowSize = size(1);
+colSize = size(2);
+
+% kernelsize
+M = 3;
+N = 3;
+v = zeros(1,M*N);
+
+output = double(zeros(size));
+for f = 1:rowSize-(M-1)
+    for g = 1:colSize-(N-1)
+        s = 1; % reset index
+        for i = 0:M-1
+            for j = 0:N-1
+                v(s) = im8(f+i,g+j);
+                s = s+1;
+            end
+        end
+        v = sort(v);
+        output(f,g) = v((length(v)+1)/2); % find median value
+    end
+end
+
+subplot(1,2,1)
+imagesc(output)
+subplot(1,2,2)
+imagesc(im8)
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % % 4 FAST FOURIER TRANSFORM %
