@@ -111,55 +111,65 @@ im = imread('cameraman.png');
 % % 3 MEDIAN FILTER % 
 % %%%%%%%%%%%%%%%%%%%
 % % 8 - custom implementation of median
-im8 = double(imread('wagon_shot_noise.png'));
+% im8 = double(imread('wagon_shot_noise.png'));
+% % 
+% % % image resolution
+% size = size(im8);
+% rowSize = size(1);
+% colSize = size(2);
+
+% % kernelsize
+% M = 3;
+% N = 3;
+% v = zeros(1,M*N);
 % 
-% % image resolution
-size = size(im8);
-rowSize = size(1);
-colSize = size(2);
+% output = double(zeros(size));
+% for f = 1:rowSize-(M-1)
+%     for g = 1:colSize-(N-1)
+%         s = 1; % reset index
+%         for i = 0:M-1
+%             for j = 0:N-1
+%                 v(s) = im8(f+i,g+j);
+%                 s = s+1;
+%             end
+%         end
+%         v = sort(v);
+%         output(f,g) = v((length(v)+1)/2); % find median value
+%     end
+% end
+% 
+% subplot(1,2,1)
+% imagesc(im8)
+% title('Before median filtering', 'fontsize', 20)
+% subplot(1,2,2)
+% imagesc(output)
+% title('After median filtering', 'fontsize', 20)
 
-% kernelsize
-M = 3;
-N = 3;
-v = zeros(1,M*N);
-
-output = double(zeros(size));
-for f = 1:rowSize-(M-1)
-    for g = 1:colSize-(N-1)
-        s = 1; % reset index
-        for i = 0:M-1
-            for j = 0:N-1
-                v(s) = im8(f+i,g+j);
-                s = s+1;
-            end
-        end
-        v = sort(v);
-        output(f,g) = v((length(v)+1)/2); % find median value
-    end
-end
-
-subplot(1,2,1)
-imagesc(output)
-subplot(1,2,2)
-imagesc(im8)
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % % 4 FAST FOURIER TRANSFORM %
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% % 10
-% figure
-% I2 = (imread('lines.png'));
-% IFFT=abs(log(fftshift(fft2(double(I2)))));
-% subplot(2,2,2)
-% imagesc(IFFT);
-% subplot(2,2,1);
-% imshow(I2);
-% I3 = (imread('cameraman.png'));
-% IFFT=abs(log(fftshift(fft2(double(I3)))));
-% subplot(2,2,4)
-% imagesc(IFFT);
-% subplot(2,2,3);
-% imshow(I3);
+
+
+
+% % % 10
+im = imread('lines.png');
+imFFT = abs(fftshift(fft2(double(im))));
+
+figure;
+imagesc(imFFT)
+
+figure;
+subplot(2,2,2)
+imagesc(IFFT);
+subplot(2,2,1);
+imshow(I2);
+I3 = (imread('cameraman.png'));
+IFFT=abs(log(fftshift(fft2(double(I3)))));
+subplot(2,2,4)
+imagesc(IFFT);
+subplot(2,2,3);
+imshow(I3);
 % 
 % 
 % % 11
@@ -212,7 +222,7 @@ imagesc(im8)
 % plot(ifft2(I5_filtered))
 % title('I5 filtered');
 % 
-% 12
+% % 12
 % im12 = double(imread('cameraman.png')); % read image
 % size = length(im12);        % length of image of cameraman
 % imFreq=fftshift(fft2(im12));% frequency amplitude of image
@@ -228,7 +238,7 @@ imagesc(im8)
 % filter(boundl:boundh, boundl:boundh) = 1;   % synthezise rectangle
 % % LP = low pass, FS = frequency domain
 % im12LPFD = filter.*imFreq;  % multiply in frequency domain is convolution in spacial domain
-% im12LP = ifft2(im12LPFD);   % inverse transform of symmetric image gives no imaginary elements
+% im12LP = ifft2(ifftshift(im12LPFD));   % inverse transform of symmetric image gives no imaginary elements
 % 
 % figure
 % subplot(1,3,1)
@@ -238,7 +248,7 @@ imagesc(im8)
 % imagesc(abs(log(im12LPFD)));
 % title('frequency domain filtered by rectangle')
 % subplot(1,3,3)
-% imshow(uint8(im12LP))       % change to unsigned int 8 bit and show
+% imshow(uint8(im12LP))      % change to unsigned int 8 bit and show
 % title('filtered image')
 % % 13
 % 
